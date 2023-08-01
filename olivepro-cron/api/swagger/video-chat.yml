@@ -1,0 +1,418 @@
+paths:
+  /api/v1/videoChat/create-session:
+    post:
+      tags:
+        - videoChat
+      summary: 모바일에서 세션 생성
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+                  example: 'email or uuid'
+                oliveType:
+                  type: TINYINT
+                  example: 1
+                firstName:
+                  type: string
+                  example: 'minsang'
+                lastName:
+                  type: string
+                  example: 'Hwang'
+                gender:
+                  type: string
+                  example: 'male'
+                lang:
+                  type: string
+                  example: 'ja'
+                birthDate:
+                  type: string
+                  example: '19991010'
+                leftMaster:
+                  type: string
+                  example: '1'
+                leftLoud:
+                  type: string
+                  example: '1'
+                leftMedium:
+                  type: string
+                  example: '1'
+                leftSoft:
+                  type: string
+                  example: '1'
+                leftCoordnateTable:
+                  type: string
+                  example: '30,12,35,12,52,12,77,0,103,0,109,0,30,12,35,12,52,12,77,0,103,0,109,0,30,13,35,13,52,13,77,0,103,0,109,0,30,15,35,15,52,15,77,0,103,0,109,0,30,17,35,17,52,17,77,2,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,-2,30,20,35,20,52,20,77,7,103,0,109,-3,30,20,35,20,52,20,77,7,103,0,109,-5,30,20,35,20,52,20,77,7,103,0,109,-6,30,20,35,20,52,20,77,7,103,-1,109,-7,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-3,109,-9,30,20,35,20,52,20,77,7,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-7,109,-13,30,20,35,20,52,20,77,8,103,-9,109,-15,30,20,35,20,52,20,77,8,103,-10,109,-16,30,20,35,20,52,20,77,8,103,-12,109,-18,30,20,35,20,52,20,77,8,103,-13,109,-19,30,20,35,20,52,20,77,8,103,-14,109,-20,30,20,35,20,52,20,77,9,103,-16,109,-22,30,20,35,20,52,20,77,9,103,-17,109,-23,30,20,35,20,52,20,77,7,103,-19,109,-25,30,20,35,20,52,20,77,6,103,-20,109,-26,30,20,35,20,52,20,77,4,103,-22,109,-28,30,20,35,20,52,20,77,3,103,-23,109,-29,30,20,35,20,52,20,77,2,103,-24,109,-30,30,20,35,20,52,20,77,0,103,-26,109,-32,30,20,35,20,52,20,77,-1,103,-27,109,-33,30,20,35,20,52,20,77,-3,103,-29,109,-35,30,20,35,20,52,20,77,-4,103,-30,109,-36,30,20,35,20,52,19,77,-6,103,-32,109,-38'
+                rightMaster:
+                  type: string
+                  example: '1'
+                rightLoud:
+                  type: string
+                  example: '1'
+                rightMedium:
+                  type: string
+                  example: '1'
+                rightSoft:
+                  type: string
+                  example: '1'
+                rightCoordnateTable:
+                  type: string
+                  example: '30,12,35,12,52,12,77,0,103,0,109,0,30,12,35,12,52,12,77,0,103,0,109,0,30,13,35,13,52,13,77,0,103,0,109,0,30,15,35,15,52,15,77,0,103,0,109,0,30,17,35,17,52,17,77,2,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,-2,30,20,35,20,52,20,77,7,103,0,109,-3,30,20,35,20,52,20,77,7,103,0,109,-5,30,20,35,20,52,20,77,7,103,0,109,-6,30,20,35,20,52,20,77,7,103,-1,109,-7,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-3,109,-9,30,20,35,20,52,20,77,7,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-7,109,-13,30,20,35,20,52,20,77,8,103,-9,109,-15,30,20,35,20,52,20,77,8,103,-10,109,-16,30,20,35,20,52,20,77,8,103,-12,109,-18,30,20,35,20,52,20,77,8,103,-13,109,-19,30,20,35,20,52,20,77,8,103,-14,109,-20,30,20,35,20,52,20,77,9,103,-16,109,-22,30,20,35,20,52,20,77,9,103,-17,109,-23,30,20,35,20,52,20,77,7,103,-19,109,-25,30,20,35,20,52,20,77,6,103,-20,109,-26,30,20,35,20,52,20,77,4,103,-22,109,-28,30,20,35,20,52,20,77,3,103,-23,109,-29,30,20,35,20,52,20,77,2,103,-24,109,-30,30,20,35,20,52,20,77,0,103,-26,109,-32,30,20,35,20,52,20,77,-1,103,-27,109,-33,30,20,35,20,52,20,77,-3,103,-29,109,-35,30,20,35,20,52,20,77,-4,103,-30,109,-36,30,20,35,20,52,19,77,-6,103,-32,109,-38'
+                count:
+                  type: string
+                  example: '2'
+                title:
+                  type: string
+                  example: 'title'
+                comment:
+                  type: string
+                  example: 'comment'
+      responses:
+        '200':
+          description: input your message here
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schemas/create-session'
+  /api/v1/videoChat/regen-pub-token:
+    post:
+      tags:
+        - videoChat
+      summary: 모바일에서 세션ID 포스트 후 토큰 재생성
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: string
+                owner:
+                  type: string
+      responses:
+        '200':
+          description: input your message here
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/regen-pub-token'
+  /api/v1/videoChat/create-mod-token:
+    post:
+      tags:
+        - videoChat
+      summary: WEB에서 세션조인 moderator token 생성
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: string
+                owner:
+                  type: string
+                client:
+              example:
+                sessionId: 'sessionIdlongstring%#%@^gwat32bebeha'
+                owner: 'Olive_OP_1'
+      responses:
+        '200':
+          description: input your message here
+          content: application/json
+
+  /api/v1/videoChat/all-list:
+    get:
+      tags:
+        - videoChat
+      summary: 모든 videoChat session list 가져오기
+      responses:
+        '200':
+          description: input your message here
+          content: application/json
+  /api/v1/videoChat/filtered-list:
+    post:
+      tags:
+        - videoChat
+      summary: 조건에 맞는 videoChat session list get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                minAge:
+                  type: integer
+                maxAge:
+                  type: integer
+                gender:
+                  type: string
+                lang:
+                  type: string
+                text:
+                  type: string
+                progressStatus:
+                  type: intenger
+              example:
+                minAge: 41
+                maxAge: 50
+                gender: 'male'
+                lang: 'en'
+                text: 'olive'
+                progressStatus: 1
+      responses:
+        200:
+          description: 조회성공.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoChatPage'
+
+  /api/v1/videoChat/edit-session-progress:
+    post:
+      tags:
+        - videoChat
+      summary: 진행 종료
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: intenger
+                setTo:
+                  type: intenger
+              example:
+                id: 1
+                setTo: 1
+      responses:
+        '200':
+          description: input your message here
+          content: application/json
+
+  /api/v1/videoChat/start-archive:
+    post:
+      tags:
+        - videoChat
+      summary: 녹화 진행
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: string
+      responses:
+        '200':
+          description: input your message here
+          content: application/json
+
+  /api/v1/videoChat/stop-archive:
+    post:
+      tags:
+        - videoChat
+      summary: 녹화 중지
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                archiveId:
+                  type: string
+      responses:
+        '201':
+          description: input your message here
+          content: application/json
+
+  /api/v1/videoChat/{id}:
+    get:
+      tags:
+        - videoChat
+      summary: videoChat session 가져오기 ( 고객 상세보기 )
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        200:
+          description: 조회성공.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findOneVideoChat'
+
+components:
+  schemas:
+    create-session:
+      type: object
+      properties:
+        code:
+          type: number
+          # example: 200
+        data:
+          type: object
+          # example: {"sessionId" :"gewagawgwwewag", "token":"gfewgwegwagew" }
+        success:
+          type: boolean
+          # example: true
+    regen-pub-token:
+      type: object
+      properties:
+        code:
+          type: number
+          # example: 200
+        data:
+          type: object
+          # example: {"sessionId" :"gewagawgwwewag", "token":"gfewgwegwagew" }
+        success:
+          type: boolean
+          # example: true
+    findOneVideoChat:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 200
+        msg:
+          type: string
+          example: VideoChat has been finded.
+          data:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              sessionId:
+                type: string
+                example: '2_MX40NzQyODk4MX5-MTY2NjQyNDQ4MjgwOX5zSUtpdEhZbitmUU1UZmFvTlE5YVBKNjN-fg'
+              owner:
+                type: string
+                example: 'owner'
+              oliveType:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: '황민상'
+              age:
+                type: integer
+                example: 1
+              gender:
+                type: string
+                example: 'male'
+              lang:
+                type: string
+                example: 'ja'
+              master:
+                type: string
+                example: '1'
+              loud:
+                type: string
+                example: '1'
+              medium:
+                type: string
+                example: '1'
+              soft:
+                type: string
+                example: '1'
+              coordnateTable:
+                type: string
+                example: '30,12,35,12,52,12,77,0,103,0,109,0,30,12,35,12,52,12,77,0,103,0,109,0,30,13,35,13,52,13,77,0,103,0,109,0,30,15,35,15,52,15,77,0,103,0,109,0,30,17,35,17,52,17,77,2,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,-2,30,20,35,20,52,20,77,7,103,0,109,-3,30,20,35,20,52,20,77,7,103,0,109,-5,30,20,35,20,52,20,77,7,103,0,109,-6,30,20,35,20,52,20,77,7,103,-1,109,-7,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-3,109,-9,30,20,35,20,52,20,77,7,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-7,109,-13,30,20,35,20,52,20,77,8,103,-9,109,-15,30,20,35,20,52,20,77,8,103,-10,109,-16,30,20,35,20,52,20,77,8,103,-12,109,-18,30,20,35,20,52,20,77,8,103,-13,109,-19,30,20,35,20,52,20,77,8,103,-14,109,-20,30,20,35,20,52,20,77,9,103,-16,109,-22,30,20,35,20,52,20,77,9,103,-17,109,-23,30,20,35,20,52,20,77,7,103,-19,109,-25,30,20,35,20,52,20,77,6,103,-20,109,-26,30,20,35,20,52,20,77,4,103,-22,109,-28,30,20,35,20,52,20,77,3,103,-23,109,-29,30,20,35,20,52,20,77,2,103,-24,109,-30,30,20,35,20,52,20,77,0,103,-26,109,-32,30,20,35,20,52,20,77,-1,103,-27,109,-33,30,20,35,20,52,20,77,-3,103,-29,109,-35,30,20,35,20,52,20,77,-4,103,-30,109,-36,30,20,35,20,52,19,77,-6,103,-32,109,-38'
+              comment:
+                type: string
+                example: 'event'
+              progressStatus:
+                type: string
+                example: 'urlLink'
+              sessionOpenAt:
+                type: integer
+                example: 1
+              createdAt:
+                type: string
+                example: '2022-06-26T04:30:51.000Z'
+              updatedAt:
+                type: string
+                example: '2022-06-26T04:30:51.000Z'
+        success:
+          type: boolean
+          example: true
+
+    VideoChatPage:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 200
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 10
+            filtered:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  sessionId:
+                    type: string
+                    example: '2_MX40NzQyODk4MX5-MTY2NjQyNDQ4MjgwOX5zSUtpdEhZbitmUU1UZmFvTlE5YVBKNjN-fg'
+                  owner:
+                    type: string
+                    example: 'owner'
+                  oliveType:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: '황민상'
+                  age:
+                    type: integer
+                    example: 1
+                  gender:
+                    type: string
+                    example: 'male'
+                  lang:
+                    type: string
+                    example: 'ja'
+                  master:
+                    type: string
+                    example: '1'
+                  loud:
+                    type: string
+                    example: '1'
+                  medium:
+                    type: string
+                    example: '1'
+                  soft:
+                    type: string
+                    example: '1'
+                  coordnateTable:
+                    type: string
+                    example: '30,12,35,12,52,12,77,0,103,0,109,0,30,12,35,12,52,12,77,0,103,0,109,0,30,13,35,13,52,13,77,0,103,0,109,0,30,15,35,15,52,15,77,0,103,0,109,0,30,17,35,17,52,17,77,2,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,18,35,18,52,18,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,4,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,18,35,18,52,18,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,19,35,19,52,19,77,5,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,0,30,20,35,20,52,20,77,6,103,0,109,-2,30,20,35,20,52,20,77,7,103,0,109,-3,30,20,35,20,52,20,77,7,103,0,109,-5,30,20,35,20,52,20,77,7,103,0,109,-6,30,20,35,20,52,20,77,7,103,-1,109,-7,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-2,109,-8,30,20,35,20,52,20,77,7,103,-3,109,-9,30,20,35,20,52,20,77,7,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-4,109,-10,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-5,109,-11,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-6,109,-12,30,20,35,20,52,20,77,8,103,-7,109,-13,30,20,35,20,52,20,77,8,103,-9,109,-15,30,20,35,20,52,20,77,8,103,-10,109,-16,30,20,35,20,52,20,77,8,103,-12,109,-18,30,20,35,20,52,20,77,8,103,-13,109,-19,30,20,35,20,52,20,77,8,103,-14,109,-20,30,20,35,20,52,20,77,9,103,-16,109,-22,30,20,35,20,52,20,77,9,103,-17,109,-23,30,20,35,20,52,20,77,7,103,-19,109,-25,30,20,35,20,52,20,77,6,103,-20,109,-26,30,20,35,20,52,20,77,4,103,-22,109,-28,30,20,35,20,52,20,77,3,103,-23,109,-29,30,20,35,20,52,20,77,2,103,-24,109,-30,30,20,35,20,52,20,77,0,103,-26,109,-32,30,20,35,20,52,20,77,-1,103,-27,109,-33,30,20,35,20,52,20,77,-3,103,-29,109,-35,30,20,35,20,52,20,77,-4,103,-30,109,-36,30,20,35,20,52,19,77,-6,103,-32,109,-38'
+                  comment:
+                    type: string
+                    example: 'event'
+                  progressStatus:
+                    type: string
+                    example: 'urlLink'
+                  sessionOpenAt:
+                    type: integer
+                    example: 1
+                  createdAt:
+                    type: string
+                    example: '2022-06-26T04:30:51.000Z'
+                  updatedAt:
+                    type: string
+                    example: '2022-06-26T04:30:51.000Z'

@@ -1,0 +1,29 @@
+paths:
+  /api/v1/reset-password:
+    post:
+      tags:
+        - resetPassword
+      summary: 패스워드 재설정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cronKey:
+                  type: string
+                email:
+                  type: email
+                emailCode:
+                  type: integer
+                password:
+                  type: password
+              example:
+                cronKey: '#OliveCronKey!@'
+                email: 'guest@oliveunion.com'
+                emailCode: 123456
+                password: '********'
+      responses:
+        '200':
+          description: input your message here
+          content: application/json

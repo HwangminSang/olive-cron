@@ -1,0 +1,19 @@
+paths:
+  /api/v1/user/emailCode:
+    post:
+      tags:
+        - emailCode
+      summary: 이메일을 통해 이메일 코드 받기
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: email
+              example:
+                email: 'guest@oliveunion.com'
+      responses:
+        '200':
+          description: Email Code has been issued.

@@ -1,0 +1,494 @@
+paths:
+  /api/v1/cs/user:
+    post:
+      tags:
+        - customerUser
+      summary: Customer 정보 등록
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser'
+      responses:
+        201:
+          description: customerUser has been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerUserCreate200'
+        500:
+          description: ServerError has been created'.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerUser500'
+/api/v1/cs/user/list:
+  get:
+    tags:
+      - customerUser
+    summary: customerUser 전체조회
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserListFind200'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+/api/v1/cs/user/page:
+  get:
+    tags:
+      - customerUser
+    summary: customerUser Page
+    parameters:
+      - in: query
+        name: pageNum
+        required: false
+        description: 페이지넘버
+      - in: query
+        name: order
+        required: false
+        description: 정렬 default = DESC
+      - in: query
+        name: limit
+        required: false
+        description: 몇개씩 볼건지
+      - in: query
+        name: orderKeyWord
+        required: false
+        description: 정렬키워드
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserPageList'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+/api/v1/cs/user/{id}:
+  get:
+    tags:
+      - customerUser
+    summary: customerUser 단일 조회
+    parameters:
+      - name: id
+        in: path
+        required: true
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserFind200'
+      400:
+        description: 파라미터를 보내지 않았을경우
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser404'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+/api/v1/cs/user:
+  delete:
+    tags:
+      - customerUser
+    summary: customerUser 삭제
+    parameters:
+      - in: query
+        name: idList
+        required: true
+        description: 삭제할id
+    responses:
+      200:
+        description: 삭제성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser200'
+      400:
+        description: 파라미터를 보내지 않았을떄
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserParameterErr400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+  /api/v1/cs/user:
+  put:
+    tags:
+      - customerUser
+    summary: customerUser 수정
+    parameters:
+      - name: id
+        in: query
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/customerUserUpdate'
+    responses:
+      200:
+        description: 수정성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser200'
+      404:
+        description: 수정하고자 하는 아이디가 존재하지 않을떄.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser404'
+
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+/api/v1/cs/user/upload:
+  post:
+    tags:
+      - customerUser
+    summary: Uploads a file.(only use Postman, swagger not work )
+    requestBody:
+      content:
+        image/png:
+          schema:
+            type: string
+            format: binary
+    responses:
+      200:
+        description: 'File Uploaded'
+
+/api/v1/cs/user/search:
+  post:
+    tags:
+      - customerUser
+    summary: KeyWord를 통해 페이지 검색
+    parameters:
+      - in: query
+        name: pageNum
+        required: false
+        description: 페이지넘버
+      - in: query
+        name: order
+        required: false
+        description: 정렬 default = DESC
+      - in: query
+        name: limit
+        required: false
+        description: 몇개씩 볼건지
+      - in: query
+        name: orderKeyWord
+        required: false
+        description: 정렬키워드
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              keyword:
+                type: string
+                example: 'name,subName,phoneNumber,subPhoneNumber,email'
+              value:
+                type: string
+                example: '이름,이름2,폰번호,폰번호2,이메일'
+
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserPageList'
+      400:
+        description: 검색 키워드 맞지 않을시.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUserKeyWord400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerUser500'
+
+components:
+  schemas:
+    customerUser:
+      type: object
+      properties:
+        name:
+          type: string
+          example: '홍길동'
+        subName:
+          type: string
+          example: '길동아부지'
+        phoneNumber:
+          type: string
+          example: '010-000-0000 '
+        subPhoneNumber:
+          type: string
+          example: '02-000-0000'
+        email:
+          type: string
+          example: 'guest@oliveunion.com'
+        customerInfo:
+          type: string
+          example: '고객 특징 기입'
+
+    customerUserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: '홍길동'
+        subName:
+          type: string
+          example: '길동아부지'
+        phoneNumber:
+          type: string
+          example: '010-000-0000 '
+        subPhoneNumber:
+          type: string
+          example: '02-000-0000'
+        email:
+          type: string
+          example: 'guest@oliveunion.com'
+        customerInfo:
+          type: string
+          example: '고객 특징 기입'
+
+    customerUserCreate200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerUser has been created.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+        success:
+          type: boolean
+          example: true
+
+    customerUserFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerUser has been finded.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: '홍길동'
+            subName:
+              type: string
+              example: '길동아부지'
+            phoneNumber:
+              type: string
+              example: '010-000-0000 '
+            subPhoneNumber:
+              type: string
+              example: '02-000-0000'
+            email:
+              type: string
+              example: 'guest@oliveunion.com'
+            customerInfo:
+              type: string
+              example: '고객 특징 기입'
+        success:
+          type: boolean
+          example: true
+
+    customerUserListFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerUser has been finded.
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: '홍길동'
+              subName:
+                type: string
+                example: '길동아부지'
+              phoneNumber:
+                type: string
+                example: '010-000-0000 '
+              subPhoneNumber:
+                type: string
+                example: '02-000-0000'
+              email:
+                type: string
+                example: 'guest@oliveunion.com'
+              customerInfo:
+                type: string
+                example: '고객 특징 기입'
+        success:
+          type: boolean
+          example: true
+
+
+    customerUser200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: successMsg
+        success:
+          type: boolean
+          example: true
+
+    customerUserKeyWord400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1018
+        msg:
+          type: string
+          example: 'Please check your Column : columeName'
+        success:
+          type: boolean
+          example: false
+
+    customerUserParameterErr400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1020
+        msg:
+          type: string
+          example: 'Please check your Parameter'
+        success:
+          type: boolean
+          example: false
+
+    customerUser404:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: 'ID : 1 is not exsit in customerUser'
+        success:
+          type: boolean
+          example: false
+
+    customerUser500:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1017
+        msg:
+          type: string
+          example: DB Error!
+        success:
+          type: boolean
+          example: false
+
+    customerUserPageList:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: Pagination success.
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 10
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: '홍길동'
+                  subName:
+                    type: string
+                    example: '길동아부지'
+                  phoneNumber:
+                    type: string
+                    example: '010-000-0000 '
+                  subPhoneNumber:
+                    type: string
+                    example: '02-000-0000'
+                  email:
+                    type: string
+                    example: 'guest@oliveunion.com'
+                  customerInfo:
+                    type: string
+                    example: '고객 특징 기입'

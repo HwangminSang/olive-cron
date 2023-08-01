@@ -1,0 +1,19 @@
+components:
+  schemas:
+    smsCode:
+      type: object
+      properties:
+        country_code:
+          type: string
+          example: '82'
+        phone_number:
+          type: string
+          example: '1012345678'
+        sms_code:
+          type: number
+          example: 123456
+        sms_expire_at:
+          type: date
+          example: '2022-02-25T05:37:29.670Z'
+      required:
+        - phone_number

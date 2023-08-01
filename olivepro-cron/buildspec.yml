@@ -1,0 +1,80 @@
+# 버전은 현재, 0.2가 권장사항입니다.
+version: 0.2
+
+# 빌드 단계별로 원하는 명령을 입력합니다.
+phases:
+  # 빌드 전에 수행할 명령을 입력합니다.
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing build dependencies...
+      - node -v
+      - npm -v
+      # - apt-get update
+      # - apt-get install -y redis-server wget
+  pre_build:
+    commands:
+      - echo Buile Phase >> pre_build phase...
+      # - wget https://raw.githubusercontent.com/Hronom/wait-for-redis/master/wait-for-redis.sh
+      # - chmod +x ./wait-for-redis.sh
+      # - service redis-server start
+      # - ./wait-for-redis.sh localhost:6379
+      # - rm -rf package-lock.json node_modules
+      - rm -rf node_modules/
+      - npm cache clean --force
+      - npm cache verify
+      - npm i
+      - npm audit fix
+
+  # 빌드를 수행할 명령을 입력합니다.
+  build:
+    commands:
+      - echo Build Phase >> Build started on `date`
+      # - npm install
+      # - redis-cli info
+      # - redis-cli info server
+      # - yarn install
+      # - yarn build
+      # - npm install
+      - echo Building ...
+      - npm run build
+  post_build:
+    commands:
+      - echo Build Phase >> Build completed on `date`
+      # - sed -i '/^bind/s/bind.*/bind 127.0.0.1/' /etc/redis/redis.conf
+      # - service redis-server restart
+      # - mv -R view /var/app/current
+      # - npm start
+# 빌드 결과물로 나온 아티팩트에 대한 정보를 제공합니다.
+artifacts:
+  # 빌드 환경에서 빌드 출력 결과물이 생성되는 위치를 나타냅니다.
+  # '*/'는 모든 파일을 재귀적으로 나타냅니다.
+  files:
+    - 'package.json'
+    - '.ebextensions/**/*'
+    - '.npmrc'
+    - 'Procfile'
+    - 'dist/**/*'
+    - 'views/*'
+    - 'public/**/*'
+    - 'secret/*'
+    #- 'static/*'
+    # - 'api/**/*'
+    # - 'config/*'
+    # - 'crons/**/*'
+    # - 'env/*'
+    # - 'libs/**/*'
+    # - 'winston/*'
+    # - 'modules/*'
+    # - '*.js'
+    # - 'serviceAccountKey.json'
+    # - 'auth-checker/*'
+    #- 'node_modules/*/'
+    #- 'yarn.lock'
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: './'
+#cache:
+#  paths:
+#     - 'node_modules/**/*'

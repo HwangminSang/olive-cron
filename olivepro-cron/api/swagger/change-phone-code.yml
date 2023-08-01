@@ -1,0 +1,42 @@
+paths:
+  /api/v1/user/changePhoneCode:
+    post:
+      tags:
+        - changePhoneCode
+      summary: 인증 코드 받기
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryCode:
+                  type: string
+                  example: '82'
+                phoneNumber:
+                  type: string
+                  example: '1012345678'
+      responses:
+        200:
+          description: changePhoneCode has been issued.
+
+  /api/v1/user/changePhoneCode/check:
+    post:
+      tags:
+        - changePhoneCode
+      summary: 인증코드 체크
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestId:
+                  type: string
+                  example: '3b48c49dfed049d2ace8fd47341886c1'
+                code:
+                  type: string
+                  example: '123456'
+      responses:
+        '200':
+          description: changePhoneCode Code checked successfully.

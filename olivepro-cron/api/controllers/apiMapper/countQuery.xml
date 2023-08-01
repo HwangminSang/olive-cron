@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmsPushCountQuery">
+    <select id="pushCountCheckFilterAgeRangeParams">
+        SELECT  COUNT(*) as filteredCount
+        FROM phone_device pd
+        INNER JOIN ( SELECT id, ROUND((TO_DAYS(NOW()) - (TO_DAYS(birthday))) / 365 ) AS age FROM olive_user WHERE birthday IS NOT NULL AND use_push = 1 ) AS agetable ON agetable.id = olive_user_id
+        INNER JOIN olive_user ou  ON pd.olive_user_id = ou.id
+        INNER JOIN ear_device ed ON pd.id = ed.phone_device_id
+        WHERE pd.fcm_token IS NOT NULL
+        <if test="appVersion != null and appVersion !='all'">
+            AND  pd.app_version  = #{appVersion}
+        </if>
+        <if test="locale != null and locale !='all'">
+            AND pd.locale = #{locale}
+        </if>
+        <if test="gender != null and gender !='all'">
+            AND ou.gender = #{gender}
+        </if>
+        <if test="swv != null and swv !='all'">
+            AND ed.firmware_version = #{swv}
+        </if>
+        <if test="osType != null and osType !='all'">
+            AND pd.os_type = #{osType}
+        </if>
+        <if test="first != null and last != null">
+            AND agetable.age BETWEEN #{first} and #{last}
+        </if>
+    </select>
+    <select id="pushCountCheckFilterParams">
+        SELECT  COUNT(*) as filteredCount
+        FROM phone_device pd
+        INNER JOIN olive_user ou  ON pd.olive_user_id = ou.id
+        INNER JOIN ear_device ed ON pd.id = ed.phone_device_id
+        WHERE pd.fcm_token IS NOT NULL AND ou.use_push = 1
+        <if test="appVersion != null and appVersion !='all'">
+            AND  pd.app_version  = #{appVersion}
+        </if>
+        <if test="locale != null and locale !='all'">
+            AND pd.locale = #{locale}
+        </if>
+        <if test="gender != null and gender !='all'">
+            AND ou.gender = #{gender}
+        </if>
+        <if test="swv != null and swv !='all'">
+            AND ed.firmware_version = #{swv}
+        </if>
+        <if test="osType != null and osType !='all'">
+            AND pd.os_type = #{osType}
+        </if>
+    </select>
+</mapper>
+
+

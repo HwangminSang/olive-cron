@@ -1,0 +1,233 @@
+paths:
+  /api/v1/cs/config:
+    post:
+      tags:
+        - customerConfig
+      summary: Customer RedisKey 정보 등록
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig'
+      responses:
+        201:
+          description: redisInfo has been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerConfigCreate200'
+        500:
+          description: ServerError has been created'.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerConfig500'
+/api/v1/cs/config/{key}:
+  get:
+    tags:
+      - customerConfig
+    summary: customerConfig Redis 단일 조회
+    parameters:
+      - name: key
+        in: path
+        required: true
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfigFind200'
+      400:
+        description: 파라미터를 보내지 않았을경우
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig404'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig500'
+
+/api/v1/cs/config:
+  delete:
+    tags:
+      - customerConfig
+    summary: customerConfig RedisKey 삭제
+    parameters:
+      - in: query
+        name: redisKey
+        required: true
+        description: 삭제할 RedisKey
+    responses:
+      200:
+        description: 삭제성공.
+      400:
+        description: 파라미터를 보내지 않았을떄
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfigParameterErr400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig500'
+
+  /api/v1/cs/config:
+  put:
+    tags:
+      - customerConfig
+    summary: customerConfig 수정
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/customerConfigUpdate'
+    responses:
+      200:
+        description: 수정성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig200'
+      404:
+        description: 수정하고자 하는 아이디가 존재하지 않을떄.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig404'
+
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConfig500'
+
+components:
+  schemas:
+    customerConfig:
+      type: object
+      properties:
+        redisKey:
+          type: string
+          example: 'RedisKey'
+        redisValue:
+          type: string
+          example: 'Redis Value (Json)'
+
+    customerConfigUpdate:
+      type: object
+      properties:
+        redisKey:
+          type: string
+          example: 'RedisKey'
+        redisValue:
+          type: string
+          example: 'Redis Value (Json)'
+
+    customerConfigCreate200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: CS Redis Info has been created.
+        data:
+          type: object
+          properties:
+            redisKey:
+              type: string
+              example: 'RedisKey'
+        success:
+          type: boolean
+          example: true
+
+    customerConfigFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerConfig has been finded.
+        data:
+          type: object
+          properties:
+            redisKey:
+              type: string
+              example: 'RedisKey'
+            redisValue:
+              type: string
+              example: 'Redis Value (Json)'
+        success:
+          type: boolean
+          example: true
+
+    customerConfig200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: successMsg
+        success:
+          type: boolean
+          example: true
+    customerConfigKeyWord400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1018
+        msg:
+          type: string
+          example: 'Please check your Column : columeName'
+        success:
+          type: boolean
+          example: false
+    customerConfigParameterErr400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1020
+        msg:
+          type: string
+          example: 'Please check your Parameter'
+        success:
+          type: boolean
+          example: false
+    customerConfig404:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: 'ID : 1 is not exsit in customerConfig'
+        success:
+          type: boolean
+          example: false
+    customerConfig500:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1017
+        msg:
+          type: string
+          example: DB Error!
+        success:
+          type: boolean
+          example: false

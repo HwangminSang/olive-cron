@@ -1,0 +1,513 @@
+paths:
+  /api/v1/cs/consult:
+    post:
+      tags:
+        - customerConsult
+      summary: Customer 상담 정보 등록
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult'
+      responses:
+        201:
+          description: customerInfo has been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerConsultCreate200'
+        500:
+          description: ServerError has been created'.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerConsult500'
+/api/v1/cs/consult/list:
+  get:
+    tags:
+      - customerConsult
+    summary: customerConsult 전체조회
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultListFind200'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+/api/v1/cs/consult/{id}:
+  get:
+    tags:
+      - customerConsult
+    summary: customerConsult 단일 조회
+    parameters:
+      - name: id
+        in: path
+        required: true
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultFind200'
+      400:
+        description: 파라미터를 보내지 않았을경우
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult404'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+/api/v1/cs/consult:
+  delete:
+    tags:
+      - customerConsult
+    summary: customerConsult 삭제
+    parameters:
+      - in: query
+        name: idList
+        required: true
+        description: 삭제할id
+    responses:
+      200:
+        description: 삭제성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult200'
+      400:
+        description: 파라미터를 보내지 않았을떄
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultParameterErr400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+  /api/v1/cs/consult:
+  put:
+    tags:
+      - customerConsult
+    summary: customerConsult 수정
+    parameters:
+      - name: id
+        in: query
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/customerConsultUpdate'
+    responses:
+      200:
+        description: 수정성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult200'
+      404:
+        description: 수정하고자 하는 아이디가 존재하지 않을떄.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult404'
+
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+/api/v1/cs/consult/page/count:
+  get:
+    tags:
+      - customerConsult
+    summary: 페이지 상단 부분
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultPageCount'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+/api/v1/cs/consult/page/search:
+  post:
+    tags:
+      - customerConsult
+    summary: KeyWord를 통해 페이지 검색
+    parameters:
+      - in: query
+        name: pageNum
+        required: false
+        description: 페이지넘버
+      - in: query
+        name: order
+        required: false
+        description: 정렬 default = DESC
+      - in: query
+        name: limit
+        required: false
+        description: 몇개씩 볼건지
+      - in: query
+        name: orderKeyWord
+        required: false
+        description: 정렬키워드
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              keyWord:
+                type: string
+                example: 'all'
+              startDate:
+                type: string
+                example: '20/12/12'
+              endDate:
+                type: string
+                example: '22/12/12'
+              categoryMain:
+                type: string
+                example: 'all'
+              categorySub:
+                type: string
+                example: 'all'
+              staff:
+                type: string
+                example: 'all'
+              csStatus:
+                type: string
+                example: 'all'
+
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultPageList'
+      400:
+        description: 검색 키워드 맞지 않을시.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultKeyWord400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+components:
+  schemas:
+    customerConsult:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        consultNumber:
+          type: string
+          example: '2022/11/28/14:55'
+        categoryMain:
+          type: string
+          example: '대분류 선택'
+        categorySub:
+          type: string
+          example: '중분류 선택'
+        consultDate:
+          type: date
+          example: 1634022060000
+        staff:
+          type: string
+          example: '이복희'
+        csStatus:
+          type: integer
+          example: '완료 (2), 예약 (1)'
+        reservedAt:
+          type: date
+          example: 1634022060000
+        content:
+          type: string
+          example: '상담 내역'
+
+    customerConsultUpdate:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        categoryMain:
+          type: string
+          example: '대분류 선택'
+        categorySub:
+          type: string
+          example: '중분류 선택'
+        consultDate:
+          type: date
+          example: 1634022060000
+        staff:
+          type: string
+          example: '이복희'
+        csStatus:
+          type: integer
+          example: '예약: 1, 완료: 2'
+        reservedAt:
+          type: date
+          example: 1634022060000
+        content:
+          type: string
+          example: '상담 내역'
+
+    customerConsultCreate200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: CS Consult has been created.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+        success:
+          type: boolean
+          example: true
+
+    customerConsultFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerConsult has been finded.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            customer_id:
+              type: integer
+              example: 1
+            consultNumber:
+              type: string
+              example: '2022/11/28/14:55'
+            categoryMain:
+              type: string
+              example: '대분류 선택'
+            categorySub:
+              type: string
+              example: '중분류 선택'
+            consultDate:
+              type: date
+              example: 1634022060000
+            staff:
+              type: string
+              example: '이복희'
+            csStatus:
+              type: integer
+              example: '완료 (2), 예약 (1)'
+            reservedAt:
+              type: date
+              example: 1634022060000
+            content:
+              type: string
+              example: '상담 내역'
+        success:
+          type: boolean
+          example: true
+
+    customerConsultListFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerConsult has been finded.
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              customer_id:
+                type: integer
+                example: 1
+              consultNumber:
+                type: string
+                example: '2022/11/28/14:55'
+              categoryMain:
+                type: string
+                example: '대분류 선택'
+              categorySub:
+                type: string
+                example: '중분류 선택'
+              consultDate:
+                type: date
+                example: 1634022060000
+              staff:
+                type: string
+                example: '이복희'
+              csStatus:
+                type: integer
+                example: '완료 (2), 예약 (1)'
+              reservedAt:
+                type: date
+                example: 1634022060000
+              content:
+                type: string
+                example: '상담 내역'
+        success:
+          type: boolean
+          example: true
+    customerConsult200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: successMsg
+        success:
+          type: boolean
+          example: true
+    customerConsultKeyWord400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1018
+        msg:
+          type: string
+          example: 'Please check your Column : columeName'
+        success:
+          type: boolean
+          example: false
+    customerConsultParameterErr400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1020
+        msg:
+          type: string
+          example: 'Please check your Parameter'
+        success:
+          type: boolean
+          example: false
+    customerConsult404:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: 'ID : 1 is not exsit in customerConsult'
+        success:
+          type: boolean
+          example: false
+    customerConsult500:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1017
+        msg:
+          type: string
+          example: DB Error!
+        success:
+          type: boolean
+          example: false
+
+    customerConsultPageList:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: Pagination success.
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 10
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  customer_id:
+                    type: integer
+                    example: 1
+                  consultNumber:
+                    type: string
+                    example: '2022/11/28/14:55'
+                  categoryMain:
+                    type: string
+                    example: '대분류 선택'
+                  categorySub:
+                    type: string
+                    example: '중분류 선택'
+                  consultDate:
+                    type: date
+                    example: 1634022060000
+                  staff:
+                    type: string
+                    example: '이복희'
+                  csStatus:
+                    type: integer
+                    example: '완료 (2), 예약 (1)'
+                  reservedAt:
+                    type: date
+                    example: 1634022060000
+                  content:
+                    type: string
+                    example: '상담 내역'

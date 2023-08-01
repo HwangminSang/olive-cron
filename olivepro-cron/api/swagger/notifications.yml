@@ -1,0 +1,77 @@
+paths:
+  /api/v1/notifications/to-one-test:
+    post:
+      tags:
+        - notifications
+      summary: 테스트 보내기
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                msg:
+                  type: string
+                email:
+                  type: string
+              example:
+                title: 'title test'
+                message: 'msg test'
+                email: 6dt_MIGHTY
+                urlLink: www.naver.com
+                image: https://pann.nate.com/talk/358324564
+      responses:
+        '200':
+          description: notifications sended.
+
+  /api/v1/notifications/count-check:
+    post:
+      tags:
+        - notifications
+      summary: 발송대상 카운트
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                osType:
+                  type: string
+                gender:
+                  type: string
+                ageRange:
+                  type: string
+                appVersion:
+                  type: string
+                swv:
+                  type: string
+                locale:
+                  type: string
+              example:
+                osType: 'all'
+                gender: 'all'
+                ageRange: 'all'
+                appVersion: 'all'
+                swv: 'all'
+                locale: 'all'
+
+      responses:
+        '200':
+          description: notifications sended.
+
+components:
+  schemas:
+    cmsPushTopicError:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1019
+        msg:
+          type: string
+          example: 'This topic is not exist'
+        success:
+          type: boolean
+          example: false

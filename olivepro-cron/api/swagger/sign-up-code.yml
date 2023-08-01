@@ -1,0 +1,42 @@
+paths:
+  /api/v1/user/signUpCode:
+    post:
+      tags:
+        - signUpCode
+      summary: 가입 시 문자를 통해 코드 받기
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryCode:
+                  type: string
+                  example: '82'
+                phoneNumber:
+                  type: string
+                  example: '1012345678'
+      responses:
+        '200':
+          description: SMS Code has been issued.
+  /api/v1/user/signUpCode/check:
+    post:
+      tags:
+        - signUpCode
+      summary: 가입 인증코드 체크
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestId:
+                  type: string
+                  example: '3b48c49dfed049d2ace8fd47341886c1'
+                code:
+                  type: string
+                  example: '123456'
+      responses:
+        '200':
+          description: Verify Code checked successfully.
+

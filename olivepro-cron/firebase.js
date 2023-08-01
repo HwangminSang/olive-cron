@@ -1,0 +1,27 @@
+let admin = require('firebase-admin')
+
+// let serviceAccount = require("./serviceAccountKey");
+
+let serviceAccount =
+  process.env.NODE_ENV === 'production'
+    ? require('./serviceAccountKey')
+    : {
+        type: 'service_account',
+        project_id: 'myolivedebug',
+        private_key_id: 'f2be1fcd1f2043a5437b8eb16825f3e0c74ac6b5',
+        private_key:
+          '-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDZU9d+SVfnZQx6\n/P38vBGBOJef/6zpsDptTDDpVvDQYiiBYeXsrdLzDJW5yRzUEGBg90gy8oCvKsKh\n8X2Vu3rSaRb5JRAO/1iFQUo4BKE24kmCnzsd4wCdZQ4nXVEsWKxSX3nNsOoUtyuV\nDIUh+D7cTrthp2a1FB3SUg/vkeLqxyTiuL39iQ/7uP5ZuzGl6mpeKTm2Ht7ZUDAO\nveuNUKIgfehgm0W5zrzZKbSTlAEjFP8LbfqPc/Wcb/hM2gyypHziJkDDQNrx0HuP\nP4A/wxVr7kUqC6tx+SrBq8fFwHsGs+fa/J6w+2eSrgYX3I6RDEu88IhhvCK/ahSU\npdFtniW5AgMBAAECggEAMlghiKv5XM10A26lcL1paa+gMkySdA0ir8yRXRCKlx9S\nBkzVLEuFHVAaRDBCSR7lELlgBItYQ5vKfCTa5IuKc4EsNPmAu5Sr3yylgo4SAYqQ\noF1+HpmGPC/bhENyCS2ed7ON3hggVb2r7yp4Ecs11qe3cTMMECERmnXvop3/PMcJ\nYVoOneeHJE0F5mbTvpsdQvpWl/ZxZgtkfjdhyqQtmAXjI+HlYyhGMFjWsKFsNgtz\nKDc3dJX1UZXR2VJVOzope4wU1V9mJrIOn1/TFm8wZc2UBtzRN07JhnbfWu0VLUxw\n6ia1ShbQxLhwKtrtFxXOQ2tl6bnnaQVBCXZiWaEqfQKBgQDym1uYONQ/xQN2PqGX\nSCgMS/bRF6gFEzwVQXr0hqrUTGv6D/pEUVBgEty+Y2WZEmg1t44Wq2l2iDmI93BL\n45+8T5E3RiCANYg0BW40e8x0c534bADafVbHMDq7NQEX1Q8dVe1sCnd7xYaVC6t2\nWAir9i9v+EO8KUo/BOg9gUNh9QKBgQDlUzkuQDQnHvW9d9FqwavKf6g8w20I8B2d\nSyH5P0fHoMq9UjE6lmcg8NO3bmfZzEufRjwsykF1+g114vG1jVIHYv/wHa1mMAjf\nI/YfvNwT39ez/uj+RWRtRKb08/31LF0imUROjGTN1QiizsTit+E7UKxF7xybtEAZ\nb+5Yzs6mNQKBgCMeiDjV6Su+Ck1ArcWnhVyaVoVYJlNtwGHXU8Q4BlyrH2pYi8L9\n/mOZ92h8HQX2my1DgAcaEy88cw+3ugLSVZo97miQ9z14Alp9esGQNj2ZSwHeKJV4\nVWqKOcZF2v2nMwPtH2xna3p4Uo4a3VxJTCAQiDduOefwFjZfMHtOzgFNAoGAGOLX\nKbW98yDg+haumy85PVhtIWrzwiyMii1FGo9LctZ4KeNphDoeJuz7jMRmcLRC4J32\nmcW5JNxl6Y0fPdyAMl0D+UK/Nn+v9scoRnlwSJfaCKZ5El7lbxYsKBjyTlDqKn8H\ncp65sbyUm1Zk91WNE6rFhzFToXIGIryK2QhYVKECgYAC11S/6ETkFOUHrbxYe3rg\nSSSGndpJu0OiGxpFHPmdJPKpyYh2EqUO+bieJkPLG8+Zb4Iytx517Zjkqb33Jzh8\nX3xw7Dv7gJKNSfKbsBmc53+JBTtsCqKOTFvsY68d5e3wx/8/0u2ZLFLkzbI/L2iT\nvdAhPaLkBSRjSctlCK/FFw==\n-----END PRIVATE KEY-----\n',
+        client_email: 'firebase-adminsdk-e674e@myolivedebug.iam.gserviceaccount.com',
+        client_id: '106991031681763169951',
+        auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+        token_uri: 'https://oauth2.googleapis.com/token',
+        auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+        client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-e674e%40myolivedebug.iam.gserviceaccount.com',
+      }
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // databaseURL: "https://notificationsdemoapp-a1f6a.firebaseio.com"
+})
+
+module.exports = admin

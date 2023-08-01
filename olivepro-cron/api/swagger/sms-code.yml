@@ -1,0 +1,21 @@
+# paths:
+#   /api/v1/user/smsCode:
+#     post:
+#       tags:
+#         - smsCode
+#       summary: 문자를 통해 sms 코드 받기
+#       requestBody:
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               properties:
+#                 country_code:
+#                   type: string
+#                   example: '82'
+#                 phone_number:
+#                   type: string
+#                   example: '1012345678'
+#       responses:
+#         200:
+#           description: VerifyCode has been issued.

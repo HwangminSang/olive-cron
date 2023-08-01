@@ -1,0 +1,24 @@
+paths:
+  /api/v1/user/smsSend:
+    post:
+      tags:
+        - smsSend
+      summary: 고객에게 문자 메세지 발송
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryCode:
+                  type: string
+                  example: '82'
+                phoneNumber:
+                  type: string
+                  example: '01026104850'
+                message:
+                  type: string
+                  example: 'sms message...'
+      responses:
+        '200':
+          description: SMS message has been sent

@@ -1,0 +1,786 @@
+paths:
+  /api/v1/cs/order:
+    post:
+      tags:
+        - customerOrder
+      summary: Order/return 정보 등록
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder'
+      responses:
+        201:
+          description: customerOrder has been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerOrderCreate200'
+        500:
+          description: ServerError has been created'.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerOrder500'
+/api/v1/cs/order/list:
+  get:
+    tags:
+      - customerOrder
+    summary: customerOrder 전체조회
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrderListFind200'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder500'
+
+/api/v1/cs/order/{id}:
+  get:
+    tags:
+      - customerOrder
+    summary: customerOrder 단일 조회
+    parameters:
+      - name: id
+        in: path
+        required: true
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrderFind200'
+      400:
+        description: 파라미터를 보내지 않았을경우
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder404'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder500'
+
+/api/v1/cs/order:
+  delete:
+    tags:
+      - customerOrder
+    summary: customerOrder 삭제
+    parameters:
+      - in: query
+        name: idList
+        required: true
+        description: 삭제할id
+    responses:
+      200:
+        description: 삭제성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder200'
+      400:
+        description: 파라미터를 보내지 않았을떄
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrderParameterErr400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder500'
+
+  /api/v1/cs/order:
+  put:
+    tags:
+      - customerOrder
+    summary: customerOrder 수정
+    parameters:
+      - name: id
+        in: query
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/customerOrderUpdate'
+    responses:
+      200:
+        description: 수정성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder200'
+      404:
+        description: 수정하고자 하는 아이디가 존재하지 않을떄.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder404'
+
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder500'
+
+/api/v1/cs/order/page/count:
+  get:
+    tags:
+      - customerOrder
+    summary: 페이지 상단 부분
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsultPageCount'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerConsult500'
+
+/api/v1/cs/order/page/search:
+  post:
+    tags:
+      - customerOrder
+    summary: KeyWord를 통해 페이지 검색
+    parameters:
+      - in: query
+        name: pageNum
+        required: false
+        description: 페이지넘버
+      - in: query
+        name: order
+        required: false
+        description: 정렬 default = DESC
+      - in: query
+        name: limit
+        required: false
+        description: 몇개씩 볼건지
+      - in: query
+        name: orderKeyWord
+        required: false
+        description: 정렬키워드
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              keyWord:
+                type: string
+                example: 'all'
+              startDate:
+                type: string
+                example: '20/12/12'
+              endDate:
+                type: string
+                example: '22/12/30'
+              shopName:
+                type: string
+                example: 'all'
+              product:
+                type: string
+                example: 'all'
+              returnReason:
+                type: string
+                example: 'all'
+              returnType:
+                type: string
+                example: 'all'
+
+    responses:
+      200:
+        description: 조회성공.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrderPageList'
+      400:
+        description: 검색 키워드 맞지 않을시.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrderKeyWord400'
+      500:
+        description: ServerError has been created'.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customerOrder500'
+
+components:
+  schemas:
+    customerOrder:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        product:
+          type: string
+          example: '제품명 : MAX'
+        productCount:
+          type: integer
+          example: 1
+        productStatus:
+          type: string
+          example: 'A, B, C'
+        orderAt:
+          type: date
+          example: 1634022060000
+        shopName:
+          type: string
+          example: '구매경로 : '
+        serialNumber:
+          type: string
+          example: '시리얼번호'
+        orderNumber:
+          type: string
+          example: '주문 번호'
+        zipCode:
+          type: string
+          example: '우편번호'
+        address:
+          type: string
+          example: '주소 기입'
+        delivery:
+          type: string
+          example: '택배사'
+        deliveryCode:
+          type: string
+          example: '운송장 번호'
+        returnType:
+          type: string
+          example: '반품/교환/AS'
+        returnReason:
+          type: string
+          example: '반품 사유'
+        returnAt:
+          type: date
+          example: 1634022060000
+        returnSerialNumber:
+          type: string
+          example: '반품 기기 시리얼번호'
+        returnReserve:
+          type: string
+          example: '회수'
+        returnUsed:
+          type: boolean
+          example: '사용여부 0: 미사용, 1: 사용'
+        asCost:
+          type: integer
+          example: 'AS 비용 금액 입력 : 10000'
+        deposit:
+          type: boolean
+          example: '지불완료 여부 0, 1'
+        returnZipCode:
+          type: string
+          example: '우편번호'
+        returnAddress:
+          type: string
+          example: '고객 주소입력'
+        returnDelivery:
+          type: string
+          example: '택배사 이름'
+        returnDeliveryCode:
+          type: string
+          example: '운송장 번호'
+        companyCost:
+          type: string
+          example: '회사 부담금'
+        userCost:
+          type: string
+          example: '고객 부담금'
+        otherAnswer:
+          type: string
+          example: '기타 사항'
+
+    customerOrderUpdate:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          example: 1
+        product:
+          type: string
+          example: '제품명 : MAX'
+        productCount:
+          type: integer
+          example: 1
+        productStatus:
+          type: string
+          example: 'A, B'
+        orderAt:
+          type: date
+          example: 1634022060000
+        shopName:
+          type: string
+          example: '구매경로 : '
+        serialNumber:
+          type: string
+          example: '시리얼번호'
+        orderNumber:
+          type: string
+          example: '주문 번호'
+        zipCode:
+          type: string
+          example: '우편번호'
+        address:
+          type: string
+          example: '주소 기입'
+        delivery:
+          type: string
+          example: '택배사'
+        deliveryCode:
+          type: string
+          example: '운송장 번호'
+        returnType:
+          type: string
+          example: '반품/교환/AS'
+        returnReason:
+          type: string
+          example: '반품 사유'
+        returnAt:
+          type: date
+          example: 1634022060000
+        returnSerialNumber:
+          type: string
+          example: '반품 기기 시리얼번호'
+        returnReserve:
+          type: string
+          example: '회수'
+        returnUsed:
+          type: boolean
+          example: '사용 여부 1: 사용, 2: 미사용'
+        asCost:
+          type: integer
+          example: 'AS 비용 금액 입력 : 1000'
+        deposit:
+          type: boolean
+          example: '지불완료 여부 0, 1'
+        returnZipCode:
+          type: string
+          example: '우편번호'
+        returnAddress:
+          type: string
+          example: '고객 주소입력'
+        returnDelivery:
+          type: string
+          example: '택배사 이름'
+        returnDeliveryCode:
+          type: string
+          example: '운송장 번호'
+        companyCost:
+          type: integer
+          example: '회사 부담금'
+        userCost:
+          type: integer
+          example: '고객 부담금'
+        otherAnswer:
+          type: string
+          example: '기타 사항'
+
+    customerOrderCreate200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerOrder has been created.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+        success:
+          type: boolean
+          example: true
+
+    customerOrderFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerOrder has been finded.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            customer_id:
+              type: integer
+              example: 1
+            product:
+              type: string
+              example: '제품명 : MAX'
+            productCount:
+              type: integer
+              example: 1
+            productStatus:
+              type: string
+              example: 'A, B'
+            orderAt:
+              type: date
+              example: 1634022060000
+            shopName:
+              type: string
+              example: '구매경로 : '
+            serialNumber:
+              type: string
+              example: '시리얼번호'
+            orderNumber:
+              type: string
+              example: '주문 번호'
+            zipCode:
+              type: string
+              example: '우편번호'
+            address:
+              type: string
+              example: '주소 기입'
+            delivery:
+              type: string
+              example: '택배사'
+            deliveryCode:
+              type: string
+              example: '운송장 번호'
+            returnType:
+              type: string
+              example: '반품/교환/AS'
+            returnReason:
+              type: string
+              example: '반품 사유'
+            returnAt:
+              type: date
+              example: 1634022060000
+            returnSerialNumber:
+              type: string
+              example: '반품 기기 시리얼번호'
+            returnReserve:
+              type: string
+              example: '회수'
+            returnUsed:
+              type: boolean
+              example: '사용여부 0: 미사용, 1: 사용'
+            asCost:
+              type: integer
+              example: 'AS 비용 금액 입력 : 1000'
+            deposit:
+              type: boolean
+              example: '지불완료 여부 0, 1'
+            returnZipCode:
+              type: string
+              example: '우편번호'
+            returnAddress:
+              type: string
+              example: '고객 주소입력'
+            returnDelivery:
+              type: string
+              example: '택배사 이름'
+            returnDeliveryCode:
+              type: string
+              example: '운송장 번호'
+            companyCost:
+              type: integer
+              example: '회사 부담금'
+            userCost:
+              type: integer
+              example: '고객 부담금'
+            otherAnswer:
+              type: string
+              example: '기타 사항'
+        success:
+          type: boolean
+          example: true
+
+    customerOrderListFind200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: customerOrder has been finded.
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              customer_id:
+                type: integer
+                example: 1
+              product:
+                type: string
+                example: '제품명 : MAX'
+              productCount:
+                type: integer
+                example: 1
+              productStatus:
+                type: string
+                example: 'A, B'
+              orderAt:
+                type: date
+                example: 1634022060000
+              shopName:
+                type: string
+                example: '구매경로 : '
+              serialNumber:
+                type: string
+                example: '시리얼번호'
+              orderNumber:
+                type: string
+                example: '주문 번호'
+              zipCode:
+                type: string
+                example: '우편번호'
+              address:
+                type: string
+                example: '주소 기입'
+              delivery:
+                type: string
+                example: '택배사'
+              deliveryCode:
+                type: string
+                example: '운송장 번호'
+              returnType:
+                type: string
+                example: '반품/교환/AS'
+              returnReason:
+                type: string
+                example: '반품 사유'
+              returnAt:
+                type: date
+                example: 1634022060000
+              returnSerialNumber:
+                type: string
+                example: '반품 기기 시리얼번호'
+              returnReserve:
+                type: string
+                example: '회수'
+              returnUsed:
+                type: boolean
+                example: '사용여부 0: 미사용, 1: 사용'
+              asCost:
+                type: integer
+                example: 'AS 비용 금액 입력 : 1000'
+              deposit:
+                type: boolean
+                example: '지불완료 여부 0, 1'
+              returnZipCode:
+                type: string
+                example: '우편번호'
+              returnAddress:
+                type: string
+                example: '고객 주소입력'
+              returnDelivery:
+                type: string
+                example: '택배사 이름'
+              returnDeliveryCode:
+                type: string
+                example: '운송장 번호'
+              companyCost:
+                type: integer
+                example: '회사 부담금 1000'
+              userCost:
+                type: integer
+                example: '고객 부담금 1000'
+              otherAnswer:
+                type: string
+                example: '기타 사항'
+        success:
+          type: boolean
+          example: true
+    customerOrder200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: successMsg
+        success:
+          type: boolean
+          example: true
+    customerOrderKeyWord400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1018
+        msg:
+          type: string
+          example: 'Please check your Column : columeName'
+        success:
+          type: boolean
+          example: false
+    customerOrderParameterErr400:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1020
+        msg:
+          type: string
+          example: 'Please check your Parameter'
+        success:
+          type: boolean
+          example: false
+    customerOrder404:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: 'ID : 1 is not exsit in customerOrder'
+        success:
+          type: boolean
+          example: false
+    customerOrder500:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1017
+        msg:
+          type: string
+          example: DB Error!
+        success:
+          type: boolean
+          example: false
+
+    customerOrderPageList:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: Pagination success.
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            count:
+              type: integer
+              example: 10
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  customer_id:
+                    type: integer
+                    example: 1
+                  product:
+                    type: string
+                    example: '제품명 : MAX'
+                  productCount:
+                    type: integer
+                    example: 1
+                  productStatus:
+                    type: string
+                    example: 'A, B'
+                  orderAt:
+                    type: date
+                    example: 1634022060000
+                  shopName:
+                    type: string
+                    example: '구매경로 : '
+                  serialNumber:
+                    type: string
+                    example: '시리얼번호'
+                  orderNumber:
+                    type: string
+                    example: '주문 번호'
+                  zipCode:
+                    type: string
+                    example: '우편번호'
+                  address:
+                    type: string
+                    example: '주소 기입'
+                  delivery:
+                    type: string
+                    example: '택배사'
+                  deliveryCode:
+                    type: string
+                    example: '운송장 번호'
+                  returnType:
+                    type: string
+                    example: '반품/교환/AS'
+                  returnReason:
+                    type: string
+                    example: '반품 사유'
+                  returnAt:
+                    type: date
+                    example: 1634022060000
+                  returnSerialNumber:
+                    type: string
+                    example: '반품 기기 시리얼번호'
+                  returnReserve:
+                    type: string
+                    example: '회수'
+                  returnUsed:
+                    type: boolean
+                    example: '사용여부 0: 미사용, 1: 사용'
+                  asCost:
+                    type: integer
+                    example: 'AS 비용 금액 입력 : 1000'
+                  deposit:
+                    type: boolean
+                    example: '지불완료 여부 0, 1'
+                  returnZipCode:
+                    type: string
+                    example: '우편번호'
+                  returnAddress:
+                    type: string
+                    example: '고객 주소입력'
+                  returnDelivery:
+                    type: string
+                    example: '택배사 이름'
+                  returnDeliveryCode:
+                    type: string
+                    example: '운송장 번호'
+                  companyCost:
+                    type: integer
+                    example: '회사 부담금'
+                  userCost:
+                    type: integer
+                    example: '고객 부담금'
+                  otherAnswer:
+                    type: string
+                    example: '기타 사항'

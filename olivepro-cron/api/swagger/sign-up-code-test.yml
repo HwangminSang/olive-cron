@@ -1,0 +1,61 @@
+paths:
+  /api/v1/user/signUpCodeTest/jp:
+    post:
+      tags:
+        - signUpCode
+      summary: jp code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryCode:
+                  type: string
+                  example: '82'
+                phoneNumber:
+                  type: string
+                  example: '1012345678'
+      responses:
+        '200':
+          description: SMS Code has been issued.
+  /api/v1/user/signUpCodeTest/kr:
+    post:
+      tags:
+        - signUpCode
+      summary: kr code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryCode:
+                  type: string
+                  example: '82'
+                phoneNumber:
+                  type: string
+                  example: '1012345678'
+      responses:
+        '200':
+          description: SMS Code has been issued.
+/api/v1/user/signUpCodeTest/us:
+  post:
+    tags:
+      - signUpCode
+    summary: us code
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              countryCode:
+                type: string
+                example: '82'
+              phoneNumber:
+                type: string
+                example: '1012345678'
+    responses:
+      '200':
+        description: SMS Code has been issued.

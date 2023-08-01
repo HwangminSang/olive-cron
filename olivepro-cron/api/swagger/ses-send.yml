@@ -1,0 +1,72 @@
+paths:
+  /api/v1/ses/mail:
+    post:
+      tags:
+        - sesSendEmail
+      summary: Customer email send
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sesSendEmail'
+      responses:
+        201:
+          description: 'ses email has been sent.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sesSendEmail200'
+        500:
+          description: 'ServerError has been created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sesSendEmail500'
+components:
+  schemas:
+    sesSendEmail:
+      type: object
+      properties:
+        from:
+          type: string
+          example: 'kelvin@oliveunion.com'
+        to:
+          type: string
+          example: 'kelvin@oliveunion.com'
+        subject:
+          type: string
+          example: 'Subject ...'
+        text:
+          type: string
+          example: 'text ...'
+    sesSendEmail200:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        msg:
+          type: string
+          example: 'ses Email has been sent.'
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 'Email-messageId'
+        success:
+          type: boolean
+          example: true
+
+    sesSendEmail500:
+      type: object
+      properties:
+        code:
+          type: number
+          example: -1017
+        msg:
+          type: string
+          example: 'Email send Error!'
+        success:
+          type: boolean
+          example: false

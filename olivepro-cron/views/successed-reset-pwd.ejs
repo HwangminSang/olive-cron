@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="unsafe-inline"> -->
+    <meta http-equiv="Content-Security-Policy" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+
+    <title>Reset password</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+      html,
+      body,
+      .wrapper {
+        height: 100%;
+      }
+      html,
+      body,
+      div,
+      header,
+      h1,
+      h2,
+      h3,
+      p,
+      input,
+      a {
+        font-family: 'Roboto', sans-serif;
+      }
+      img {
+        transform: translateZ(0);
+        image-rendering: -webkit-optimize-contrast;
+        backface-visibility: hidden;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        padding: 0;
+        margin: -1px;
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        overflow: hidden;
+      }
+
+      .wrapper {
+      }
+      .wrapper header {
+        justify-content: center;
+        padding: 0;
+        height: 56px;
+        text-align: center;
+      }
+      .wrapper header h1 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+      }
+      .wrapper header h1 picture img {
+        display: flex;
+        max-width: 92px;
+      }
+      .wrapper header h1 span {
+        display: inline-flex;
+        margin-left: 12px;
+        font-size: 20px;
+        color: #fff;
+      }
+
+      .wrapper main {
+        width: 380px;
+        max-width: 380px;
+        margin: 30px auto;
+        text-align: center;
+      }
+      .wrapper main .guidance h3 {
+        margin-bottom: 20px;
+        font-weight: normal;
+        font-size: 20px;
+        color: #1c1c1f;
+        line-height: 1.2;
+      }
+      .wrapper main .guidance p {
+        margin-bottom: 40px;
+        font-weight: 300;
+        font-size: 18px;
+        color: #5a5a5f;
+        line-height: 1.33;
+      }
+
+      .wrapper main a {
+        display: inline-block;
+        width: 100%;
+        height: 56px;
+        border-radius: 6px;
+        background-color: #345cf8;
+        font-weight: normal;
+        font-size: 20px;
+        color: #fff;
+        line-height: 56px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="navbar bg-black">
+        <h1>
+          <picture>
+            <source media="(min-width:600px)" srcset="../../../images/logo@2x.png" />
+            <source media="(min-width:1200px)" srcset="../../../images/logo@3x.png" />
+            <img src="../../../images/logo.png" alt="Olive" style="width: auto" />
+          </picture>
+          <span>Password Reset</span>
+        </h1>
+      </header>
+      <main>
+        <h2 class="sr-only">비밀번호 설정 성공</h2>
+        <div class="guidance">
+          <img src="../../../images/img-password-successed.png" alt="The new password setting is complete!" />
+          <h3>The new password<br />setting is complete!</h3>
+          <p>Please log in again after launching the My<br />Olive app.</p>
+        </div>
+        <a href="javascript:void(0);" onclick="getMobileOperatingSystem();">Run the My Olive app</a>
+      </main>
+    </div>
+    <script>
+      // Content-Security-Policy: script-src 'self' https://apis.google.com
+
+      function getMobileOperatingSystem() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera
+
+        if (/windows|windows phone/i.test(userAgent)) {
+          location.href = 'https://play.google.com/store/apps/details?id=com.oliveunion.olive_pro'
+        } else if (/android/i.test(userAgent)) {
+          location.href = 'market://details?id=com.oliveunion.olive_pro'
+        } else if (/Mac|iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          location.href = 'itms-apps://itunes.apple.com/app/id1556151850'
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+{
+  // 코드 포맷을 prettier로 설정
+  "plugins": ["prettier", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  // eslint의 룰을 기본 권장설정으로 설정
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  // 코드를 해석하는 parser에 대한 설정
+  "parserOptions": {
+    // 자바스크립트 버전, 7은 ECMA2016
+    "ecmaVersion": 2018,
+    // 모듈 export를 위해 import, export를 사용 가능여부를 설정, script는 사용불가
+    "sourceType": "module",
+    // jsx 허용을 설정, back-end 설정이기 때문에 사용 안함
+    "ecmaFeatures": {
+      "jsx": false
+    }
+  },
+  // linter가 파일을 분석할 때, 미리 정의된 전역변수에 무엇이 있는지 명시하는 속성
+  "env": {
+    // 브라우저의 document와 같은 객체 사용 여부
+    "browser": false,
+    // node.js에서 console과 같은 전역변수 사용 여부
+    "node": true
+  },
+  // ESLint가 무시할 디렉토리, 파일을 설정
+  "ignorePatterns": ["dist/", "node_modules/"],
+  // ESLint 룰을 설정
+  "rules": {
+    // prettier에 맞게 룰을 설정
+    "prettier/prettier": "error",
+    // prettier에 맞게 룰을 설정
+    "strict": 0,
+    "no-restricted-globals": 0,
+    "no-param-reassign": 0,
+    "no-else-return": [
+      "error",
+      {
+        "allowElseIf": true
+      }
+    ],
+    "prefer-promise-reject-errors": 0,
+    "consistent-return": 0,
+    "no-unused-vars": 1,
+    "no-restricted-syntax": 0,
+    "no-continue": 0,
+    "no-await-in-loop": 0,
+    "camelcase": 0,
+    "import/newline-after-import": {
+      "count": 0
+    },
+    "import/no-dynamic-require": 0,
+    "no-console": 0,
+    "unused-imports/no-unused-imports": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "type", "index"],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "@/components/common",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/components/hooks",
+            "group": "internal",
+            "position": "before"
+          }
+        ]
+      }
+    ]
+  }
+}

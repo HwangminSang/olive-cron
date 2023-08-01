@@ -1,0 +1,366 @@
+paths:
+  /api/v1/ga/countryTotal:
+    get:
+      tags: 
+        - google analytics
+      summary: ga 데이터 조회
+      responses:
+        '200':
+          description: ga query result
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ga-country-total'
+
+  /api/v1/ga/activeUserCountryAndOneYear:
+     get:
+        tags:
+          - google analytics
+        summary: ga 데이터 조회 12개월 전
+        parameters:
+          - in: query
+            name: country
+            required: true
+            description: 나라
+        responses:
+          '200':
+            description: ga query result
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ga-active-user'
+  /api/v1/ga/activeUserCountryAndNweek:
+    get:
+      tags:
+        - google analytics
+      summary: ga 데이터 조회 12주전
+      parameters:
+        - in: query
+          name: country
+          required: true
+          description: 나라
+      responses:
+        '200':
+          description: ga query result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ga-active-user'
+  /api/v1/ga/activeUserAgeRange:
+    get:
+      tags:
+        - google analytics
+      summary: 연령별 데이터
+      parameters:
+        - in: query
+          name: country
+          required: true
+          description: 연령별
+      responses:
+        '200':
+          description: ga query result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ga-active-user'
+
+
+
+  /api/v1/ga/activeUserPerDay:
+    get:
+      tags: 
+        - google analytics
+      summary: ga 데이터 조회
+      responses:
+        '200':
+          description: ga query result
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ga-active-user'
+
+
+
+  /api/v1/ga/activeUserGenderCount:
+   get:
+     tags:
+       - google analytics
+     summary: ga  성별 인원수 데이터 조회
+     responses:
+       '200':
+         description: ga query result
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/ga-active-user'
+components:
+  schemas:
+    ga-country-total:
+      type: object
+      properties:
+        countryTotal:
+          type: object
+          properties:
+            dimensionHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: countryId
+            metricHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: totalUsers
+                  type: 
+                    type: string
+                    example: TYPE_INTEGER
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  dimensionValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: US
+                        oneValue:
+                          type: string
+                          example: value
+                  metricValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: "13004"
+                        oneValue:
+                          type: string
+                          example: value
+            totals:
+              type: array
+              items:
+                type: number
+                example:
+            maximums:
+              type: array
+              items:
+                type: number
+            minimums:
+              type: array
+              items:
+                type: number
+            rowCount:
+              type: number
+            metadata:
+              type: object
+              properties:
+                dataLossFromOtherRow:
+                  type: boolean
+                currencyCode:
+                  type: string
+                  example: USD
+                _currencyCode:
+                  type: string
+                  example: currencyCode
+                timeZone:
+                  type: string
+                  example: Asia/Seoul
+                _timeZone:
+                  type: string
+                  example: timeZone
+            propertyQuota:
+              type: string
+              example: 
+            kind:
+              type: string
+              example: analyticsData#runReport
+        total:
+          type: object
+          properties:
+            dimensionHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: totalUsers
+            metricHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: totalUsers
+                  type: 
+                    type: string
+                    example: TYPE_INTEGER
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  dimensionValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: US
+                        oneValue:
+                          type: string
+                          example: value
+                  metricValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: "13004"
+                        oneValue:
+                          type: string
+                          example: value
+            totals:
+              type: array
+              items:
+                type: number
+                example:
+            maximums:
+              type: array
+              items:
+                type: number
+            minimums:
+              type: array
+              items:
+                type: number
+            rowCount:
+              type: number
+            metadata:
+              type: object
+              properties:
+                dataLossFromOtherRow:
+                  type: boolean
+                currencyCode:
+                  type: string
+                  example: USD
+                _currencyCode:
+                  type: string
+                  example: currencyCode
+                timeZone:
+                  type: string
+                  example: Asia/Seoul
+                _timeZone:
+                  type: string
+                  example: timeZone
+            propertyQuota:
+              type: string
+              example: 
+            kind:
+              type: string
+              example: analyticsData#runReport
+
+    ga-active-user:
+      type: object
+      properties:
+        activeUserPerDay:
+          type: object
+          properties:
+            dimensionHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: date
+            metricHeaders:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: 
+                    type: string
+                    example: activeUsers
+                  type: 
+                    type: string
+                    example: TYPE_INTEGER
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  dimensionValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: "20210608"
+                        oneValue:
+                          type: string
+                          example: value
+                  metricValues:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: "7"
+                        oneValue:
+                          type: string
+                          example: value
+            totals:
+              type: array
+              items:
+                type: number
+                example:
+            maximums:
+              type: array
+              items:
+                type: number
+            minimums:
+              type: array
+              items:
+                type: number
+            rowCount:
+              type: number
+            metadata:
+              type: object
+              properties:
+                dataLossFromOtherRow:
+                  type: boolean
+                currencyCode:
+                  type: string
+                  example: USD
+                _currencyCode:
+                  type: string
+                  example: currencyCode
+                timeZone:
+                  type: string
+                  example: Asia/Seoul
+                _timeZone:
+                  type: string
+                  example: timeZone
+            propertyQuota:
+              type: string
+              example: 
+            kind:
+              type: string
+              example: analyticsData#runReport
+
